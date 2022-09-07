@@ -12,7 +12,7 @@ class DefaultController extends AbstractController
     public function index(): Response
     {
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'MBO RIJNLAND',
+            'controller_name' => 'MBO RIJNLAND Zoetermeer',
             'name' => 'Henry Robben',
         ]);
     }
