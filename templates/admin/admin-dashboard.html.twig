@@ -1,0 +1,33 @@
+{# templates/admin/my-custom-page.html.twig #}
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Main Menu{% endblock %}
+{% block page_actions %}
+    <a class="btn btn-primary" href="{{ path('app_default') }}">Web-Site</a>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1>Time Controll backend.</h1>
+        <p>Hier kunt u aan de linkerkant de crud kiezen die u wilt bewerken.</p>
+        <p>Met <b><i>Site</i></b> kunt u terug naar front-end web applicatie.</p>
+    </div>
+    {#
+    <table class="datagrid">
+        <thead>
+        <tr>
+            <td>Some Column</td>
+            <td>Another Column</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in my_own_data %}
+            <tr>
+                <td>{{ data.someColumn }}</td>
+                <td>{{ data.anotherColumn }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    #}
+{% endblock %}

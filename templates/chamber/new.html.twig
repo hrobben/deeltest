@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Chamber{% endblock %}
+
+{% block body %}
+    <h1>Create new Chamber</h1>
+
+    {{ include('chamber/_form.html.twig') }}
+
+    <a href="{{ path('app_chamber_index') }}">back to list</a>
+{% endblock %}
