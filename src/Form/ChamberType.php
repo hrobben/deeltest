@@ -6,6 +6,7 @@ use App\Entity\Chamber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ChamberType extends AbstractType
 {
@@ -15,6 +16,14 @@ class ChamberType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('price')
+            ->add('imageFile', VichFileType::class,  [
+                    'required' => false,
+                    'label_format' => "File",
+                    'label' => "File",
+                    'download_link' => true,
+                    'allow_delete' => false,
+                    'asset_helper' => true,
+                    ])
         ;
     }
 
