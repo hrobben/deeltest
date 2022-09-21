@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Chamber index</h1>
 
-    <table class="table">
+    <table id="lijst" class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -21,9 +21,9 @@
             <tr>
                 <td>{{ chamber.id }}</td>
                 <td>{{ chamber.name }}</td>
-                <td>{{ chamber.description }}</td>
+                <td>{{ chamber.description | raw }}</td>
                 <td>{{ chamber.price }}</td>
-                <td><img src="{{ vich_uploader_asset(chamber, 'imageFile') }}" alt="{{ chamber.name }}" class="img-fluid"></td>
+                <td><img src="{{ vich_uploader_asset(chamber, 'imageFile') }}" alt="{{ chamber.name }}" height="70"></td>
                 <td>
                     <a href="{{ path('app_chamber_show', {'id': chamber.id}) }}">show</a>
                     <a href="{{ path('app_chamber_edit', {'id': chamber.id}) }}">edit</a>

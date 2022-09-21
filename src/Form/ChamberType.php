@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Chamber;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +15,7 @@ class ChamberType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description', CKEditorType::class)
             ->add('price')
             ->add('imageFile', VichFileType::class,  [
                     'required' => false,

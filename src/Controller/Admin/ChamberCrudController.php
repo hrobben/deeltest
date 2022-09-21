@@ -23,12 +23,12 @@ class ChamberCrudController extends AbstractCrudController
     }
 
 
-/*    public function configureCrud(Crud $crud): Crud
+    public function configureCrud(Crud $crud): Crud
     {
         return $crud
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
             ;
-    }*/
+    }
 
     public function configureFields(string $pageName): iterable
     {
@@ -44,7 +44,17 @@ class ChamberCrudController extends AbstractCrudController
 
         return [
             TextField::new('name'),
-            TextEditorField::new('description'),
+            /*TextEditorField::new('description'),*/
+            TextareaField::new('description')
+                ->setFormType(CKEditorType::class)
+                ->setFormTypeOptions(
+                    [
+                        'config'=>[
+                            'toolbar' => 'full',
+                        ],
+                        'attr' => ['rows' => '10'] ,
+                    ])
+                ->addCssClass('field-ck-editor')->onlyOnForms(),
             MoneyField::new('price')->setCurrency('EUR'),
             $filename,
         ];
