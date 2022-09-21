@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Image</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ chamber.name }}</td>
                 <td>{{ chamber.description }}</td>
                 <td>{{ chamber.price }}</td>
+                <td><img src="{{ vich_uploader_asset(chamber, 'imageFile') }}" alt="{{ chamber.name }}" class="img-fluid"></td>
                 <td>
                     <a href="{{ path('app_chamber_show', {'id': chamber.id}) }}">show</a>
                     <a href="{{ path('app_chamber_edit', {'id': chamber.id}) }}">edit</a>
