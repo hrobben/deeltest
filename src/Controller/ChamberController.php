@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Chamber;
 use App\Form\ChamberType;
 use App\Repository\ChamberRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,7 @@ class ChamberController extends AbstractController
     }
 
     #[Route('/new', name: 'app_chamber_new', methods: ['GET', 'POST'])]
+    #[isgranted('ROLE_ADMIN')]
     public function new(Request $request, ChamberRepository $chamberRepository): Response
     {
         $chamber = new Chamber();
@@ -49,6 +51,7 @@ class ChamberController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_chamber_edit', methods: ['GET', 'POST'])]
+    #[isgranted('ROLE_ADMIN')]
     public function edit(Request $request, Chamber $chamber, ChamberRepository $chamberRepository): Response
     {
         $form = $this->createForm(ChamberType::class, $chamber);
@@ -67,6 +70,7 @@ class ChamberController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_chamber_delete', methods: ['POST'])]
+    #[isgranted('ROLE_ADMIN')]
     public function delete(Request $request, Chamber $chamber, ChamberRepository $chamberRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$chamber->getId(), $request->request->get('_token'))) {

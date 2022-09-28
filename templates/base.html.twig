@@ -22,10 +22,14 @@
             <a class="p-2 text-dark" href="{{ path('app_chamber_index') }}">Kamer</a>
             <a class="p-2 text-dark" href="#">Enterprise</a>
             <a class="p-2 text-dark" href="#">Support</a>
-            <a class="p-2 text-dark" href="{{ path('admin') }}">Admin</a>
+            {% if is_granted("ROLE_ADMIN") %}
+                <a class="p-2 text-dark" href="{{ path('admin') }}">Admin</a>
+            {% else %}
+                <a class="p-2 text-dark" href="#">Admin is verstopt.</a>
+            {% endif %}
         </nav>
         {% if app.user %}
-            <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Sign off</a>
+            <a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Sign off {{ app.user.email }}</a>
         {% else %}
             <a class="btn btn-outline-primary" href="{{ path('app_login') }}">Sign up</a>
         {% endif %}

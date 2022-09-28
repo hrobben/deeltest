@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Chamber;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -16,7 +17,7 @@ class ChamberType extends AbstractType
         $builder
             ->add('name')
             ->add('description', CKEditorType::class)
-            ->add('price')
+            ->add('price', MoneyType::class)
             ->add('imageFile', VichFileType::class,  [
                     'required' => false,
                     'label_format' => "File",

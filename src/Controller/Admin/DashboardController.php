@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Chamber;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -44,5 +45,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToRoute('Site', 'fas fa-arrow-left', "app_default");
         yield MenuItem::linkToCrud('Chamber', 'fas fa-list', Chamber::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
     }
 }
