@@ -18,14 +18,14 @@
 
             <div class="row">
                 <div class="col-md-10">
-                    <table class="table table-responsive text-white">
+                    <table class="table table-responsive">
                         <thead>
                         <tr>
+                            <th>Key</th>
                             <th>Aantal</th>
                             <th>Naam</th>
                             <th>Omschrijving</th>
                             <th class="textAlign-right">Prijs</th>
-                            <th class="textAlign-right">BTW</th>
                             <th class="textAlign-right">Totaal</th>
                             <th class="textAlign-center">Aktie</th>
                         </tr>
@@ -34,15 +34,14 @@
 
                         {% for key, item in cart %}
                             <tr>
-                                {# <td>{{ key }}</td> #}
+                                <td>{{ key }}</td>
                                 <td>{{ item }}</td>
-
                                 {% for row in product %}
                                     {% if row.id == key %}
                                         <td>{{ row.name }}</td>
                                         <td>{{ row.description | raw }}</td>
                                         <td class="textAlign-right">€{{ row.price | number_format(2) }}</td>
-                                        <td class="textAlign-right">{% if row.salestaxcode.percentage is defined %}{{ row.salestaxcode.percentage | number_format(0) }}%{% else %}0%{% endif %}</td>
+                                        {#<td class="textAlign-right">{% if row.salestaxcode.percentage is defined %}{{ row.salestaxcode.percentage | number_format(0) }}%{% else %}0%{% endif %}</td>#}
                                         <td class="textAlign-right">
                                             €{{ (row.price * item) | number_format(2) }}</td>
                                         {% set total = total + (row.price * item) %}

@@ -27,6 +27,7 @@
                 </td>
                 <td>
                     <a href="{{ path('app_chamber_show', {'id': chamber.id}) }}">show</a>
+                    <a href="{{ path('app_cart_add', {'id': chamber.id}) }}">reserveer</a>
                     {% if is_granted("ROLE_ADMIN") %}
                         <a href="{{ path('app_chamber_edit', {'id': chamber.id}) }}">edit</a>
                     {% endif %}

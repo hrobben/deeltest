@@ -4,17 +4,24 @@ namespace App\Controller;
 
 use App\Repository\ChamberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CartController extends AbstractController
 {
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
+
     #[Route('/cart', name: 'app_cart')]
     public function index(ChamberRepository $chamberRepository): Response
     {
-        $session = new Session();
-        $session->start();
+        $session = $this->requestStack->getSession();
         $cart = $session->get('cart', []);
 
         // $cart = array_keys($cart);
@@ -36,30 +43,62 @@ class CartController extends AbstractController
                 'product' => $product,
             ));
         } else {
-            return $this->render('cart/index.html.twig', array(
+            return $this->render('chamber/index.html.twig', array(
                 'empty' => true,
             ));
         }
      }
 
     #[Route('/add/{id}', name: 'app_cart_add')]
-    public function add($id)
+    public function add($id, ChamberRepository $chamberRepository)
     {
-        $session = new Session();
-        $session->start();
+        $session = $this->requestStack->getSession();
+
         $cart = $session->get('cart', []);
-        $cart['id'] = $id;
-        $cart['number'] = $cart['number'] + 1;
+        if (isset($cart[$id])) {
+            ++$cart[$id];
+        } else {
+            $cart[$id] = 1;
+        }
 
         $session->set('cart', $cart);
 
         // product toevoegen aan session
+
+        return $this->redirectToRoute('app_cart');
     }
 
-    #[Route('/remove', name: 'app_cart_remove')]
-    public function remove()
+    #[Route('/remove/{id}', name: 'app_cart_remove')]
+    public function remove($id)
     {
         // product verwijderen uit session
+        $session = $this->requestStack->getSession();
+
+        $cart = $session->get('cart', []);
+        // if it doesn't exist redirect to cart index page. end
+        if (!$cart[$id]) {
+            return $this->redirectToRoute('app_cart');
+        }
+
+        // check if the $id already exists in it.
+        if (isset($cart[$id])) {
+            $cart[$id] = $cart[$id] - 1;
+            if ($cart[$id] < 1) {
+                unset($cart[$id]);
+            }
+        } else {
+            return $this->redirectToRoute('app_cart');
+        }
+
+        $session->set('cart', $cart);
+
+        //echo('<pre>');
+        //print_r($cart); echo ('</pre>');die();        $session->set('cart', $cart);
+
+        // product toevoegen aan session
+
+        return $this->redirectToRoute('app_cart');
+
     }
 
     #[Route('/checkout', name: 'app_cart_checkout')]
