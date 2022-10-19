@@ -14,14 +14,14 @@
         {% set total = 0 %}
         {% set count = 0 %}
 
-        {% if product %}
+        {% if products %}
 
             <div class="row">
                 <div class="col-md-10">
                     <table class="table table-responsive">
                         <thead>
                         <tr>
-                            <th>Key</th>
+                            {#<th>Key</th>#}
                             <th>Aantal</th>
                             <th>Naam</th>
                             <th>Omschrijving</th>
@@ -34,9 +34,9 @@
 
                         {% for key, item in cart %}
                             <tr>
-                                <td>{{ key }}</td>
+                               {# <td>{{ key }}</td>#}
                                 <td>{{ item }}</td>
-                                {% for row in product %}
+                                {% for row in products %}
                                     {% if row.id == key %}
                                         <td>{{ row.name }}</td>
                                         <td>{{ row.description | raw }}</td>
@@ -70,7 +70,7 @@
                 <a href="{{ path('app_chamber_index') }}#menu">
                     <button class="btn book-a-table-btn">{{ button_label|default('Verder winkelen?') }}</button>
                 </a>
-                <a href="#">
+                <a href="{{ path('app_cart_checkout') }}">
                     <button class="btn book-a-table-btn btn-success">{{ button_label|default('Afrekenen') }}</button>
                 </a>
             </div>
